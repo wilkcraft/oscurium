@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Oscurium</title>
+  <link rel="icon" href="oscuriumLogo.png" />
+  <style>
+    body {
+      margin: 0;
+      font-family: Times New Roman, serif;
+      background-color: white;
+    }
+
+    header {
+      background-color: #2c3e50;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+    
+    .social-cards{
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    .discord-card {
+        background: #1e1f22;
+        border-radius: 20px;
+        padding: 20px;
+        color: white;
+        font-family: Times New Roman, serif;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        text-decoration: none;
+        display: block;
+        margin: 30px auto;
+        transition: transform 0.2s;
+      }
+
+      .discord-card:hover {
+        transform: scale(1.03);
+      }
+
+      .discord-image {
+        width: 64px;
+        height: 64px;
+        border-radius: 15px;
+        object-fit: cover;
+      }
+
+      .discord-title {
+        font-size: 22px;
+        font-weight: bold;
+        margin: 10px 0 5px;
+      }
+
+      .discord-subtext {
+        color: #aaa;
+        font-size: 14px;
+        margin-bottom: 15px;
+      }
+
+      .discord-icon-label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 16px;
+        margin-bottom: 10px;
+      }
+
+      .discord-icon-label img {
+        width: 20px;
+        height: 20px;
+      }
+
+      .discord-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .discord-tag {
+        background-color: #2c2f33;
+        border-radius: 15px;
+        padding: 6px 12px;
+        font-size: 13px;
+        color: #ccc;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .discord-tag img {
+        width: 14px;
+        height: 14px;
+      }
+
+    .whatsapp-card {
+        width: 320px;    
+        background: #1d4d23;
+        border-radius: 20px;
+        padding: 20px;
+        color: white;
+        font-family: Times New Roman, serif;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        text-decoration: none;
+        display: flex;
+        margin: 30px auto;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        transition: transform 0.2s;
+    }
+
+      .whatsapp-card:hover {
+        transform: scale(1.03);
+      }
+
+      .whatsapp-image {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      .whatsapp-title {
+        font-size: 22px;
+        font-weight: bold;
+        margin: 10px 0 5px;
+      }
+
+      .whatsapp-subtext {
+        color: #aaa;
+        font-size: 14px;
+        margin-bottom: 15px;
+      }
+
+    .menu-btn {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    .dropdown {
+      position: absolute;
+      top: 50px;
+      left: 20px;
+      background-color: #34495e;
+      border-radius: 5px;
+      display: none;
+      flex-direction: column;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      z-index: 1;
+    }
+
+    .dropdown a {
+      padding: 10px 20px;
+      color: white;
+      text-decoration: none;
+    }
+
+    .dropdown a:hover {
+      background-color: #3d566e;
+    }
+
+    main {
+      padding: 20px;
+    }
+
+    .section {
+      display: none;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    h1{
+        font-size: 35px;
+        text-align: center;
+    }
+
+    p{
+        color: black;
+        font-size: 20px;
+        text-align: center;
+    }
+
+    a{
+      cursor: pointer;
+    }
+
+    #p2{
+        text-align: left;
+        margin: 10px;
+    }
+
+    #span1{
+        width: 150px;
+        text-align: center;
+        border-radius: 5px;
+        border: #bfe1f6 solid 3px;
+    }
+    
+    #wiki{
+        text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+    <h2>Oscurium</h2>
+    <div class="dropdown" id="menu">
+      <a onclick="showSection('general')">General</a>
+      <a onclick="showSection('wiki')">Wiki</a>
+      <a onclick="showSection('ideas')">Ideas</a>
+      <a onclick="showSection('actualizaciones')">Actualizaciones</a>
+    </div>
+  </header>
+
+  <main>
+    <div id="general" class="section active">
+      <p style="color: #45818e; border-bottom: 2px dotted #45818e; padding-bottom: 5px; margin: 0 auto; text-align: center;">👾👾👾👾 Migueloncio1793 presenta, con ayuda de Minecraft Java, MCreator y Blockbench 👾👾👾👾</p>
+      <h1 style="color: #45818e;">👾 Oscurium 👾</h1>
+      <p style="color: #45818e;"><span id="span1">Migueloncio1793 CREATION™</span> <span id="span1" style="color: #0a53a8; background-color: #bfe1f6;">🌐 OPERATIVO 🌐</span> <span id="span1">Versión Forge 1.20.1</span></p>
+      <h1 style="font-size: 25px;">⚒ FORGE EXPERIENCE ⚒</h1>
+      <p></p>
+      <p>🎮 Este es un mod que va sobre una nueva dimensión con sus bosses, herramientas, hechizos y más. Vamos a empezar… 💎👾💎</p>
+      <p></p>
+      <p>🎮 Pasos para jugarlo: Primero tiene que estar en el servidor de discord, ahí habrá un apartado para descargar el mod. También en Novedades podrá ver todas las nuevas actualizaciones y arreglos de bugs.</p>
+      <div class="social-cards">
+      <a class="discord-card" href="https://discord.gg/phDz3Vsg" target="_blank">
+      <img src="oscurium.png" alt="Oscurium logo" class="discord-image" />
+      <div class="discord-title">Oscurium</div>
+      <div class="discord-subtext" style="margin-bottom: 0">Servidor de Discord</div>
+      <div class="discord-subtext" style="margin-top: 5px">Est. may 2025</div>
+
+      <div class="discord-icon-label">
+        <img
+          src="minecraft.png"
+          alt="Minecraft icon"
+        />
+        <span>Minecraft</span>
+      </div>
+
+      <div class="discord-tags">
+        <div class="discord-tag">🟩 minecraft</div>
+        <div class="discord-tag">🔧 mod</div>
+        <div class="discord-tag">💻 programming</div>
+      </div>
+    </a>
+    <a class="whatsapp-card" href="https://chat.whatsapp.com/GgoezzH2gKcIL7PKFGLTDy" target="_blank">
+      <img src="oscurium.png" alt="Oscurium logo" class="whatsapp-image" />
+      <div class="whatsapp-title">Oscurium</div>
+      <div class="whatsapp-subtext">Grupo de WhatsApp</div>
+    </a>
+    </div>
+    </div>
+    <div id="wiki" class="section">
+      <h1 style="color: #6fc0f0;">📄 WIKI 📄</h1>
+      <p id="p2"><strong>Enderman Essence:</strong> Este es un nuevo item parecido a la perla de ender. Para poder conseguirla necesitas matar a un Enderman, y con un 10% de probabilidad te soltará esta esencia.</p>
+      <img id="wiki" src="endermanEssence.jpg" alt="endermanEssence"/>
+      <p id="p2"><strong>Dark Lantern:</strong> Está lámpara obviamente no emite ningún tipo de luz, solo sirve para esta mesa y para decorar.</p>
+      <img id="wiki" src="darkLantern.png" alt="darkLantern"/>
+      <p id="p2"><strong>Dark altar:</strong> En esta nueva mesa tendrás que añadir tres esencias de Enderman y una lámpara oscura para invocar al nuevo miniboss, el Dark Golem.</p>
+      <img id="wiki" src="darkAltar.png" alt="darkAltar"/>
+      <p id="p2"><strong>Dark Golem:</strong> Este es el miniboss que sale al invocarlo con el altar oscuro. Y tiene estas características:</p>
+      <p id="p2" style="margin-left: 50px;">- Vida: 150pts.<br>- Experiencia al morir: 20pts.<br>- Velocidad de movimiento: 0,15<br>- Altura del paso: 1<br>- Rango de seguimiento: 16 bloques<br>- Rango de rastreo: 64 bloques<br>- Fuerza de ataque: 20pts.<br>- Protección de armadura: 3pts.<br>- Retroceso de ataque: 0,8pts.<br>- Resistencia al retroceso: 1,5pts.<br>- Es inmune a las flechas, al daño por caída y al ahogamiento.</p>
+      <img id="wiki" src="darkGolemGUI.png" alt="darkGolemGUI"/>
+      <p id="p2"><strong>Dark Essence: </strong>Este item lo soltará el Dark Golem al morir, y se podrá usar en la mesa de herrería para poder mejorar tu arma de netherita un 50%.</p>
+      <img id="wiki" src="darkEssence.png" alt="darkEssence"/>
+      <p id="p2"><strong>Dark rod fragment: </strong>Este mineral lo suelta el Dark rod fragment ore, y solo se puede fundir en un alto horno.</p>
+      <img id="wiki" src="darkRodFragment.png" alt="darkRodFragment"/>
+      <p id="p2"><strong>Dark rod: </strong>Para hacer esta Dark rod se necesitan cuatro Dark rod fragment.</p>
+      <img id="wiki" src="darkRod.png" alt="darkRod"/>
+      <p id="p2"><strong>Cursed sword: </strong>Está es una nueva espada. Y tiene estas características:</p>
+      <p id="p2" style="margin-left: 50px;">- Eficiencia: 12pts.<br>- Encantabilidad: 22pts.<br>- Daño del ataque: 12pts.<br>- Velocidad de ataque: 19,2pts.<br>- Durabilidad: 3046pts.</p>
+      <img id="wiki" src="cursedSword.png" alt="cursedSword"/>
+      <p id="p2"><strong>Cursed pickaxe: </strong>Este es un nuevo pico. Y tiene estas características:</p>
+      <p id="p2" style="margin-left: 50px;">- Eficiencia: 13,5pts.<br>- Encantabilidad: 22pts.<br>- Daño del ataque: 9pts.<br>- Velocidad de ataque: 18pts.<br>- Durabilidad: 3046pts.</p>
+      <img id="wiki" src="cursedPickaxe.png" alt="cursedPickaxe"/>
+      <p id="p2"><strong>Cursed axe: </strong>Está es una nueva hacha. Y tiene estas características:</p>
+      <p id="p2" style="margin-left: 50px;">- Eficiencia: 13,5pts.<br>- Encantabilidad: 22pts.<br>- Daño del ataque: 10pts.<br>- Velocidad de ataque: 18pts.<br>- Durabilidad: 3046pts.</p>
+      <img id="wiki" src="cursedAxe.png" alt="cursedAxe"/>
+      <p id="p2"><strong>Cursed hoe: </strong>Está es una nueva azada. Y tiene estas características:</p>
+      <p id="p2" style="margin-left: 50px;">- Eficiencia: 13,5pts.<br>- Encantabilidad: 22pts.<br>- Daño del ataque: 1,5pts.<br>- Velocidad de ataque: 18pts.<br>- Durabilidad: 4062pts.</p>
+      <img id="wiki" src="cursedHoe.png" alt="cursedHoe"/>
+      <p id="p2"><strong>Cursed armor: </strong>Está es una nueva armadura llamda Cursed armor. Y tiene estas características:</p>
+      <p id="p2" style="margin-left: 50px;">- Durabilidad total: 55pts.<br>- Reducción de daño del casco: 4pts.<br>- Reducción de daño de la pechera: 12pts.<br>- Reducción de daño de los pantalones: 9pts.<br>- Reducción de daño de las botas: 4pts.<br>- Encantabilidad: 22pts.<br>- Dureza: 4,5pts.<br>- Resistencia al empuje: 0,15pts.</p>
+      <img id="wiki" src="cursedHelmet.png" alt="cursedHelmet"/>
+      <img id="wiki" src="cursedChestplate.png" alt="cursedChestplate"/>
+      <img id="wiki" src="cursedLeggings.png" alt="cursedLeggings"/>
+      <img id="wiki" src="cursedBoots.png" alt="cursedBoots"/>
+      <p id="p2"><strong>Cursed flint and steel: </strong>Este mechero sirve para abrir el portal a la Deep Void</p>
+      <img id="wiki" src="CursedFlintAndSteel.PNG" alt="CursedFlintAndSteel"/>
+      <p id="p2"><strong>Mimetization Cristal: </strong>Al hacer click derecho con este cristal te haces invisible durante 10s</p>
+      <img id="wiki" src="mimetizationCristal.PNG" alt="mimetizationCristal"/>
+      <p id="p2"><strong>Obscurita ingot y Obscurita nugget: </strong>El Obscurita ingot se hace fundiendo en un alto horno un Raw Obscurita. Y la Obscurita nugget se hace como cualquier otr pepita</p>
+      <img id="wiki" src="obscuritaNugget.PNG" alt="obscuritaNugget"/>
+      <img id="wiki" src="obscuritaIngot.PNG" alt="obscuritaIngot"/>
+      <p id="p2"><strong>Cursed armor: </strong>Está es una nueva armadura llamada Obscurita armor. Y tiene estas características:</p>
+      <p id="p2" style="margin-left: 50px;">- Durabilidad total: 22pts.<br>- Reducción de daño del casco: 2pts.<br>- Reducción de daño de la pechera: 6pts.<br>- Reducción de daño de los pantalones: 5pts.<br>- Reducción de daño de las botas: 2pts.<br>- Encantabilidad: 13pts.<br>- Dureza: 2,25pts.<br>- Resistencia al empuje: 0,125pts.<br>- Efectos: Quita la ceguera y añade visión nocturna.</p>
+      <img id="wiki" src="ObscuritaHelmet.PNG" alt="obscuritaHelmet"/>
+      <img id="wiki" src="obscuritaChestplate.PNG" alt="obscuritaChestplate"/>
+      <img id="wiki" src="obscuritaLeggings.PNG" alt="obscuritaLeggings"/>
+      <img id="wiki" src="obscuritaBoots.PNG" alt="obscuritaBoots"/>
+    </div>
+    <div id="ideas" class="section">
+      <h1 style="color: #ffd700;">💡 IDEAS 💡</h1>
+      <p>Las ideas que presentéis para el mod, tienen que pasar este filtro, sino sus ideas no volverán a ser valoradas:</p>
+      <p id="p2"><strong>💡Obligatorio📌:</strong> Cuando vayas a enviar una idea tendrá que poner de asunto su nombre de usuario de Minecraft.</p>
+      <p id="p2"><strong>💡Importante📌:</strong> De momento las ideas tiene que ser básicas, ya que el mod acaba de empezar.</p>
+      <p id="p2"><strong>💡Primera regla📌:</strong> La idea no podrá ser de más de 50 palabras por temas técnicos (máximo te puedes pasar 10 palabras), sino se rechazará sin mirarla.</p>
+      <p id="p2"><strong>💡Segunda regla📌:</strong> No se pueden presentar ideas de cosas obscenas, oscuras, o ideológicas que influyan en decisiones reales y cambio de perspectiva de la vida real.</p>
+      <p id="p2"><strong>💡Tercera regla📌:</strong> Sí o sí tiene que ser cosas que tengan que ver con la idea principal del mod Oscurium.</p>
+      <p id="p2"><strong>💡Cuarta regla📌:</strong> Sí esa idea ya ha sido rechazada no se podrá presentar nuevamente.</p>
+      <p id="p2"><strong>💡Quinta regla📌:</strong> Si se envían chorradas o cosas que no tengan que ver con aportar ideas interesantes y beneficiosas para el desarrollo del mod, serán descartadas.</p>
+      <p id="p2"><strong>💡Sexta regla📌:</strong> Si ya hay 20 ideas no se aceptará ni se leerá ninguna otra hasta que se complete el 50% de las que ya hay.</p>
+      <p>Para poder aportar ideas entre en el apartado de ideas de Discord.</p>
+    </div>
+    <div id="actualizaciones" class="section">
+      <h1 style="color: #5a3286;">♻ ACTUALIZACIONES ♻</h1>
+      <p>Aquí se pondrá la versión del mod y su actualización:</p>
+      <p id="p2"><strong>♻ Versión 1.2.4:</strong> Se han añadido dos logros, “Cursed Armour” (se da cuando tienes toda la armadura maldita y te entrega el ítem “Cursed Flint”) y “Cursed Tools” (se da cuando tienes todas las herramientas malditas y te entrega el ítem “Cursed Steel”), también se ha añadido el “Cursed flint and steel” y su crafteo. Además se ha agregado la dimensión “Deep void”, se entrá en ella al usar el nuevo mechero en el portal grande de la ancient city, en él solo spawnean endermans, y los bloques son el bloque de sculk y la “Deepsculk”, un nuevo bloque que se rompe con la azada y te da experiencia.</p>
+      <p id="p2"><strong>♻ Versión 1.1.9:</strong> Se han añadido las herramientas de “Cursed pickaxe”, “Cursed axe” y “Cursed hoe”; también se ha añadido la armadura maldita, y se ha añadido todos los crafteos de lo todo lo dicho</p>
+      <p id="p2"><strong>♻ Versión 1.1.5:</strong> Se ha añadido el bloque de “Dark rod fragment ore”, los minerales “Raw dark rod fragment”, “Dark rod fragment” y el ítem “Dark rod”. También se a cambiado los crafteos de “Dark lantern”, “Dark altar” y el de “Cursed sword”</p>
+      <p id="p2"><strong>♻ Versión 1.0.9:</strong> Se ha añadido el “Dark golem”, el “Dark altar”, todas las esencias y la lámpara. También se han arreglado varios bugs y errores de modelos de texturas.</p>
+    </div>
+  </main>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('menu');
+      menu.style.display = (menu.style.display === 'flex') ? 'none' : 'flex';
+    }
+
+    function showSection(id) {
+      const sections = document.querySelectorAll('.section');
+      sections.forEach(section => {
+        section.classList.remove('active');
+      });
+      document.getElementById(id).classList.add('active');
+      document.getElementById('menu').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
