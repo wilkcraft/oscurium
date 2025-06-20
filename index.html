@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Oscurium</title>
+    <link rel="icon" href="oscuriumLogo.png" />
+    <style>
+      body {
+        margin: 0;
+        font-family: Times New Roman, serif;
+        background-color: white;
+      }
+
+      header {
+        background-color: #201c1e;
+        background-image: url("header.png");
+        background-repeat: repeat;
+        background-size: 10%;
+        color: white;
+        padding: 10px 20px;
+        display: flex;
+        align-items: center;
+        position: relative;
+      }
+
+      /* Animación */
+      #leftBox {
+        position: fixed;
+        top: 87px;
+        left: 0px;
+        width: 50%;
+        height: 100%;
+        background-color: #7d7d7d;
+        background-image: url("background.png");
+        background-repeat: repeat;
+        background-size: auto;
+        animation: fadeLeft 2.5s linear forwards;
+        opacity: 0;
+      }
+
+      @keyframes fadeLeft {
+        from {
+          opacity: 1;
+          transform: translateX(0);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(-100%);
+        }
+      }
+
+      #rightBox {
+        position: fixed;
+        top: 87px;
+        right: 0px;
+        width: 50%;
+        height: 100%;
+        background-color: #7d7d7d;
+        background-image: url("background.png");
+        background-repeat: repeat;
+        background-size: auto;
+        animation: fadeRight 2.5s linear forwards;
+        opacity: 0;
+      }
+
+      @keyframes fadeRight {
+        from {
+          opacity: 1;
+          transform: translateX(0);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(100%);
+        }
+      }
+
+      .home-image {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        object-fit: cover;
+        margin-right: 7px;
+      }
+
+      .menu-btn {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+        margin-right: 10px;
+      }
+
+      .dropdown {
+        position: absolute;
+        top: 50px;
+        left: 20px;
+        background-color: #3a3a3a;
+        background-image: url("dropDown.png");
+        background-repeat: repeat;
+        background-size: 90%;
+        border-radius: 5px;
+        display: none;
+        flex-direction: column;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        z-index: 1;
+      }
+
+      .dropdown a {
+        padding: 10px 20px;
+        color: white;
+        text-decoration: none;
+      }
+
+      .dropdown a:hover {
+        background-color: #666666;
+        background-image: url("dropDownHover.png");
+        background-repeat: repeat;
+        background-size: 90%;
+      }
+
+      .social-cards {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+
+      /* Discord */
+      .discord-card {
+        background: #01073e;
+        border-radius: 20px;
+        padding: 20px;
+        color: white;
+        font-family: Times New Roman, serif;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        text-decoration: none;
+        display: block;
+        margin: 30px auto;
+        transition: transform 0.2s;
+      }
+
+      .discord-card:hover {
+        transform: scale(1.03);
+      }
+
+      .discord-image {
+        width: 64px;
+        height: 64px;
+        border-radius: 15px;
+        object-fit: cover;
+      }
+
+      .discord-title {
+        font-size: 22px;
+        font-weight: bold;
+        margin: 10px 0 5px;
+      }
+
+      .discord-subtext {
+        color: #aaa;
+        font-size: 14px;
+        margin-bottom: 15px;
+      }
+
+      .discord-icon-label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 16px;
+        margin-bottom: 10px;
+      }
+
+      .discord-icon-label img {
+        width: 20px;
+        height: 20px;
+      }
+
+      .discord-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .discord-tag {
+        background-color: #2c2f33;
+        border-radius: 15px;
+        padding: 6px 12px;
+        font-size: 13px;
+        color: #ccc;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .discord-tag img {
+        width: 14px;
+        height: 14px;
+      }
+
+      /* WhatsApp */
+      .whatsapp-card {
+        width: 320px;
+        background: #1d4d23;
+        border-radius: 20px;
+        padding: 20px;
+        color: white;
+        font-family: Times New Roman, serif;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        text-decoration: none;
+        display: flex;
+        margin: 30px auto;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        transition: transform 0.2s;
+      }
+
+      .whatsapp-card:hover {
+        transform: scale(1.03);
+      }
+
+      .whatsapp-image {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      .whatsapp-title {
+        font-size: 30px;
+        font-weight: bold;
+        margin: 10px 0 5px;
+      }
+
+      .whatsapp-subtext {
+        color: #aaa;
+        font-size: 16px;
+        margin-bottom: 15px;
+      }
+
+      /* CurseForge */
+      .curseForge-card {
+        background: linear-gradient(
+          to bottom,
+          #1e1f22 0%,
+          #1e1f22 90%,
+          #fd6938 100%
+        );
+        border-radius: 20px;
+        padding: 20px;
+        color: white;
+        font-family: Times New Roman, serif;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        text-decoration: none;
+        display: block;
+        margin: 30px auto;
+        transition: transform 0.2s;
+      }
+
+      .curseForge-card:hover {
+        transform: scale(1.03);
+      }
+
+      .curseForge-image {
+        width: 64px;
+        height: 64px;
+        border-radius: 15px;
+        object-fit: cover;
+      }
+
+      .curseForge-title {
+        font-size: 22px;
+        font-weight: bold;
+        margin: 10px 0 5px;
+      }
+
+      .curseForge-subtext {
+        color: #aaa;
+        font-size: 14px;
+        margin-bottom: 15px;
+      }
+
+      .curseForge-icon-label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 16px;
+        margin-bottom: 10px;
+      }
+
+      .curseForge-icon-label img {
+        width: 20px;
+        height: 20px;
+      }
+
+      .curseForge-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .curseForge-tag {
+        background-color: #2c2f33;
+        border-radius: 15px;
+        padding: 6px 12px;
+        font-size: 13px;
+        color: #ccc;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .curseForge-tag img {
+        width: 14px;
+        height: 14px;
+      }
+
+      /* Modrinth */
+      .modrinth-card {
+        background: linear-gradient(
+          to bottom,
+          #1e1f22 0%,
+          #1e1f22 90%,
+          #19ca62 100%
+        );
+        border-radius: 20px;
+        padding: 20px;
+        color: white;
+        font-family: Times New Roman, serif;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        text-decoration: none;
+        display: block;
+        margin: 30px auto;
+        transition: transform 0.2s;
+      }
+
+      .modrinth-card:hover {
+        transform: scale(1.03);
+      }
+
+      .modrinth-image {
+        width: 64px;
+        height: 64px;
+        border-radius: 15px;
+        object-fit: cover;
+      }
+
+      .modrinth-title {
+        font-size: 22px;
+        font-weight: bold;
+        margin: 10px 0 5px;
+      }
+
+      .modrinth-subtext {
+        color: #aaa;
+        font-size: 14px;
+        margin-bottom: 15px;
+      }
+
+      .modrinth-icon-label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 16px;
+        margin-bottom: 10px;
+      }
+
+      .modrinth-icon-label img {
+        width: 20px;
+        height: 20px;
+      }
+
+      .modrinth-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .modrinth-tag {
+        background-color: #2c2f33;
+        border-radius: 15px;
+        padding: 6px 12px;
+        font-size: 13px;
+        color: #ccc;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .modrinth-tag img {
+        width: 14px;
+        height: 14px;
+      }
+
+      main {
+        padding: 20px;
+      }
+
+      .section {
+        display: none;
+      }
+
+      .section.active {
+        display: block;
+      }
+
+      h1 {
+        font-size: 45px;
+        text-align: center;
+      }
+
+      p {
+        color: black;
+        font-size: 20px;
+        text-align: center;
+      }
+
+      a {
+        cursor: pointer;
+      }
+
+      #p2 {
+        text-align: left;
+        margin: 10px;
+      }
+
+      #span1 {
+        width: 150px;
+        text-align: center;
+        border-radius: 5px;
+        border: #bfe1f6 solid 3px;
+      }
+
+      #wiki {
+        text-align: center;
+      }
+
+      size {
+        font-size: 20px;
+      }
+
+      .imagenItem{
+         height: 150px;
+         width: 150px;
+      }
+
+      .imagenCrafteo{
+         height: 100%;
+         width: 370px;
+      }
+
+      .imagenHorno{
+         height: 100%;
+         width: 270px;
+      }
+
+      .imagenArmadura{
+         height: 100%;
+         width: 350px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <button class="menu-btn" onclick="toggleMenu()">☰</button>
+      <img src="oscurium.png" alt="Oscurium logo" class="home-image" />
+      <h2>Oscurium</h2>
+      <div class="dropdown" id="menu">
+        <a onclick="showSection('general')">General</a>
+        <a onclick="showSection('wiki')">Wiki</a>
+        <a onclick="showSection('ideas')">Ideas</a>
+        <a onclick="showSection('actualizaciones')">Updates</a>
+      </div>
+    </header>
+
+    <main>
+      <div id="general" class="section active">
+        <div id="leftBox"></div>
+        <div id="rightBox"></div>
+        <p
+          style="
+            border-bottom: 2px dotted;
+            padding-bottom: 10px;
+            margin: 0 auto;
+            text-align: center;
+          "
+        >
+          Migueloncio1793 presents, with the help of Minecraft Java,
+          MCreator and Blockbench…
+        </p>
+        <h1 style="color: #45818e">* Oscurium *</h1>
+        <p style="color: #45818e">
+          <span id="span1">Migueloncio1793 CREATION™</span>
+          <span id="span1" style="color: #0a53a8; background-color: #bfe1f6"
+            >🌐 OPERATIVO 🌐</span
+          >
+          <span id="span1">Minecraft version 1.20.1 Forge</span>
+        </p>
+        <h1 style="font-size: 25px">⚒ FORGE EXPERIENCE ⚒</h1>
+        <p></p>
+        <p>
+          🔧 This mod adds new bosses, items, tools, armor, mobs and dimensions.
+          Let's get started…
+        </p>
+        <p></p>
+        <p>
+          <size style="font-size: 24px"><strong>🎮 Steps to play it:</strong></size> You have to be on the <strong>Discord server</strong>, where there will be a section called <strong>Updates</strong> to download the mod and to see all the new updates and bug fixes.
+        </p>
+        <div class="social-cards">
+          <a
+            class="discord-card"
+            href="https://discord.gg/QYbq5epVGB"
+            target="_blank"
+          >
+            <img src="oscurium.png" alt="Oscurium logo" class="discord-image" />
+            <div class="discord-title">Oscurium</div>
+            <div class="discord-subtext" style="margin-bottom: 0">
+              Discord Server
+            </div>
+            <div class="discord-subtext" style="margin-top: 5px">
+              Est. may 2025
+            </div>
+
+            <div class="discord-icon-label">
+              <img src="minecraft.png" alt="Minecraft icon" />
+              <span>Minecraft</span>
+            </div>
+
+            <div class="discord-tags">
+              <div class="discord-tag">🟩 minecraft</div>
+              <div class="discord-tag">🔧 mod</div>
+              <div class="discord-tag">💻 programming</div>
+            </div>
+          </a>
+          <a
+            class="whatsapp-card"
+            href="https://chat.whatsapp.com/GgoezzH2gKcIL7PKFGLTDy"
+            target="_blank"
+          >
+            <img
+              src="oscurium.png"
+              alt="Oscurium logo"
+              class="whatsapp-image"
+            />
+            <div class="whatsapp-title">Oscurium</div>
+            <div class="whatsapp-subtext">WhatsApp Group</div>
+          </a>
+        </div>
+        <div class="social-cards">
+          <a
+            class="curseForge-card"
+            href="https://www.curseforge.com/minecraft/mc-mods/oscurium"
+            target="_blank"
+          >
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                margin-bottom: 10px;
+              "
+            >
+              <img
+                src="oscurium.png"
+                alt="Oscurium logo"
+                class="curseForge-image"
+              />
+              <div class="curseForge-title">Oscurium</div>
+            </div>
+
+            <div class="curseForge-icon-label">
+              <img src="curseForge.png" alt="curseForge icon" />
+              <span>Download mod from CurseForge</span>
+            </div>
+            <div class="curseForge-subtext">
+              This mod adds new bosses, items, tools, armor, mobs and
+              dimensions.
+            </div>
+
+            <div class="curseForge-tags">
+              <div class="curseForge-tag">⚔️ Armor, Tools, and Weapons</div>
+              <div class="curseForge-tag">♥️ Adventure and RPG</div>
+              <div class="curseForge-tag">✨ Magic</div>
+            </div>
+          </a>
+          <a
+            class="modrinth-card"
+            href="https://modrinth.com/mod/oscurium"
+            target="_blank"
+          >
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                margin-bottom: 10px;
+              "
+            >
+              <img
+                src="oscurium.png"
+                alt="Oscurium logo"
+                class="modrinth-image"
+              />
+              <div class="modrinth-title">Oscurium</div>
+            </div>
+
+            <div class="modrinth-icon-label">
+              <img src="modrinth.png" alt="modrinth icon" />
+              <span>Download mod from Modrinth</span>
+            </div>
+            <div class="modrinth-subtext">
+              This mod adds new bosses, items, tools, armor, mobs and
+              dimensions.
+            </div>
+
+            <div class="modrinth-tags">
+              <div class="modrinth-tag">⚔️ Equipment</div>
+              <div class="modrinth-tag">♥️ Adventure</div>
+              <div class="modrinth-tag">✨ Magic</div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div id="wiki" class="section">
+        <div id="leftBox"></div>
+        <div id="rightBox"></div>
+        <h1 style="color: #6fc0f0">📄 WIKI 📄</h1>
+        <p id="p2">
+          <strong>Enderman Essence:</strong> This is a new item similar to the
+          ender pearl. To get it you need to kill an Enderman, and with a 10%
+          chance he will release this essence.
+        </p>
+        <img id="wiki" class="imagenItem" src="endermanEssence.jpg" alt="endermanEssence"/>
+        <p id="p2">
+          <strong>Dark Lantern:</strong> This lamp obviously does not emit any
+          type of light, it only serves for this table and for decoration.
+        </p>
+        <img id="wiki" class="imagenItem" src="darkLantern.jpg" alt="darkLantern" style="margin-right: 10px;"/>
+        <img id="wiki" class="imagenCrafteo" src="darkLanternRecipe.png" alt="darkLanternRecipe" />
+        <p id="p2">
+          <strong>Dark altar:</strong> In this new table you will have to add
+          three Enderman essences and a dark lamp to summon the new miniboss,
+          the Dark Golem.
+        </p>
+        <img id="wiki" class="imagenItem" src="darkAltar.png" alt="darkAltar" style="margin-right: 10px;"/>
+        <img id="wiki" class="imagenCrafteo" src="darkAltarRecipe.png" alt="darkAltarRecipe" />
+        <p id="p2">
+          <strong>Dark Golem:</strong> This is the miniboss that comes out when
+          you summon it with the dark altar. And it has these characteristics:
+        </p>
+        <p id="p2" style="margin-left: 50px">
+          - Life: 150pts.<br />- Experience at death: 20pts.<br />- Movement
+          speed: 0.15<br />- Step height: 1<br />- Tracking range: 16 blocks<br />-
+          Tracking range: 64 blocks<br />- Attack strength: 20pts.<br />- Armor
+          protection: 3pts.<br />- Attack recoil: 0.8pts.<br />- Recoil
+          resistance: 1.5pts.<br />- Immune to arrows, falling damage and
+          drowning.
+        </p>
+        <img id="wiki" class="imagenItem" src="darkGolem.jpg" alt="darkGolem" style="margin-right: 10px; height: 100%;"/>
+        <img id="wiki" class="imagenCrafteo" src="darkGolemGUI.png" alt="darkGolemGUI" />
+        <p id="p2">
+          <strong>Dark Essence: </strong>This item will be dropped by the Dark
+          Golem upon death, and can be used at the blacksmith table to upgrade
+          your netherite weapon by 50%.
+        </p>
+        <img id="wiki" class="imagenItem" src="darkEssence.png" alt="darkEssence"/>
+        <p id="p2">
+          <strong>Dark rod fragment: </strong>This ore is released by the Dark
+          rod fragment ore, and can only be smelted in a blast furnace.
+        </p>
+        <img id="wiki" class="imagenItem" src="darkRodFragment.jpg" alt="darkRodFragment" style="margin-right: 10px;"/>
+        <img id="wiki" class="imagenHorno" src="darkRodFragmentRecipe.png" alt="darkRodFragmentRecipe" />
+        <p id="p2">
+          <strong>Dark rod: </strong>Four Dark rod fragments are needed to make
+          this Dark rod.
+        </p>
+        <img id="wiki" class="imagenCrafteo" src="darkRod.png" alt="darkRod" />
+        <p id="p2">
+          <strong>Cursed sword: </strong>This is a new sword. And it has these
+          characteristics:
+        </p>
+        <p id="p2" style="margin-left: 50px">
+          - Efficiency: 12pts.<br />- Enchantment: 2pts.<br />- Attack damage:
+          12pts.<br />- Attack speed: 2.4pts.<br />- Durability: 3046pts.
+        </p>
+        <img id="wiki" class="imagenArmadura" src="cursedSword.png" alt="cursedSword" />
+        <p id="p2">
+          <strong>Cursed pickaxe: </strong>This is a new peak. And it has these
+          characteristics:
+        </p>
+        <p id="p2" style="margin-left: 50px">
+          - Efficiency: 13.5pts.<br />- Enchantment: 2pts.<br />- Attack
+          damage: 9pts.<br />- Attack speed: 1.8pts.<br />- Durability: 3046pts.
+        </p>
+        <img id="wiki" class="imagenArmadura" src="cursedPickaxe.png" alt="cursedPickaxe" />
+        <p id="p2">
+          <strong>Cursed axe: </strong>This is a new axe.And it has these
+          characteristics:
+        </p>
+        <p id="p2" style="margin-left: 50px">
+          - Efficiency: 13.5pts.<br />- Enchantment: 2pts.<br />- Attack
+          damage: 15pts.<br />- Attack speed: 1.35pts.<br />- Durability: 3046pts.
+        </p>
+        <img id="wiki" class="imagen" src="cursedAxe.png" alt="cursedAxe" />
+        <p id="p2">
+          <strong>Cursed shovel: </strong>This is a new shovel. And it has these
+          characteristics:
+        </p>
+        <p id="p2" style="margin-left: 50px">
+          - Efficiency: 13.5pts.<br />- Enchantment: 2pts.<br />- Attack
+          damage: 7.5pts.<br />- Attack speed: 1.5pts.<br />- Durability:
+          3048pts.
+        </p>
+        <img id="wiki" class="imagenArmadura" src="cursedShovel.png" alt="cursedShovel" />
+        <p id="p2">
+          <strong>Cursed hoe: </strong>This is a new hoe. And it has these
+          characteristics:
+        </p>
+        <p id="p2" style="margin-left: 50px">
+          - Efficiency: 13.5pts.<br />- Enchantment: 2pts.<br />- Attack
+          damage: 6pts.<br />- Attack speed: 1.5pts.<br />- Durability:
+          4062pts.
+        </p>
+        <img id="wiki" class="imagenArmadura" src="cursedHoe.png" alt="cursedHoe" />
+        <p id="p2">
+          <strong>Cursed armor: </strong>This is a new armor. And it has these
+          characteristics:
+        </p>
+        <p id="p2" style="margin-left: 50px">
+          - Total durability: 55pts.<br />- Helmet damage reduction: 4pts.<br />-
+          Chestplate damage reduction: 12pts.<br />- Leggings damage reduction:
+          9pts.<br />- Boots damage reduction: 4pts.<br />- Enchantment:
+          22pts.<br />- Hardness: 4.5pts.<br />- Thrust resistance: 0.15pts.
+        </p>
+        <img id="wiki" class="imagenArmadura" src="cursedHelmet.png" alt="cursedHelmet" />
+        <img id="wiki" class="imagenArmadura" src="cursedChestplate.png" alt="cursedChestplate" />
+        <img id="wiki" class="imagenArmadura" src="cursedLeggings.png" alt="cursedLeggings" />
+        <img id="wiki" class="imagenArmadura" src="cursedBoots.png" alt="cursedBoots" />
+        <p id="p2">
+          <strong>Cursed flint and steel: </strong>This lighter is used to open
+          the portal to the Deep Void.
+        </p>
+        <img id="wiki" class="imagenCrafteo" src="CursedFlintAndSteel.PNG" alt="CursedFlintAndSteel"/>
+        <p id="p2">
+          <strong>Mimetization Cristal: </strong>It is obtained with a 10% chance of defeating an Oscube, and by right clicking on this
+          crystal you become invisible for 10 seconds.
+        </p>
+        <img id="wiki" class="imagenItem" src="mimetizationCristal.PNG" alt="mimetizationCristal"/>
+        <p id="p2">
+          <strong>Obscurita ingot y Obscurita nugget: </strong>The Obscurite
+          ingot is made by melting in a blast furnace a Raw Obscurite. And the
+          Obscurite nugget is made like any other nugget.
+        </p>
+        <img id="wiki" class="imagenItem" src="obscuritaOre.jpg" alt="obscuritaOre" style="margin-right: 10px;"/>
+        <img id="wiki" class="imagenHorno" src="obscuritaIngot.PNG" alt="obscuritaIngot" />
+        <img id="wiki" class="imagenCrafteo" src="obscuritaNugget.PNG" alt="obscuritaNugget" />
+        <p id="p2">
+          <strong>Obscurita armor: </strong>This is a new armor called Obscurita
+          armor. And it has these characteristics:
+        </p>
+        <p id="p2" style="margin-left: 50px">
+          - Total durability: 22pts.<br />- Helmet damage reduction: 2pts.<br />-
+          Chestplate damage reduction: 6pts.<br />- Leggings damage reduction:
+          5pts.<br />- Boots damage reduction: 2pts.<br />- Enchantment:
+          13pts.<br />- Hardness: 2.25pts.<br />- Thrust resistance:
+          0.125pts.<br />- Efectos: Quita la ceguera y añade visión nocturna.
+        </p>
+        <img id="wiki" class="imagenCrafteo" src="ObscuritaHelmet.PNG" alt="obscuritaHelmet" />
+        <img id="wiki" class="imagenCrafteo" src="obscuritaChestplate.PNG" alt="obscuritaChestplate"/>
+        <img id="wiki" class="imagenCrafteo" src="obscuritaLeggings.PNG" alt="obscuritaLeggings" />
+        <img id="wiki" class="imagenCrafteo" src="obscuritaBoots.PNG" alt="obscuritaBoots" />
+        <p id="p2">
+          <strong>Immortal Cristal: </strong>It is obtained with a 10% chance of defeating an Deependerman, and by right clicking on this crystal gives you the “Immortal effect” for 5 seconds.
+        </p>
+        <img id="wiki" class="imagenItem" src="immortalCristal.png" alt="immortalCristal"/>
+        <p id="p2">
+          <strong>Immortal effect: </strong>This is a new effect that gives you maximum level resistance during the seconds the potion lasts, and if you are attacked you will not take damage and you will be teleported to a random place in a radius of 3x3 blocks in the “x” and “z” axes.
+        </p>
+        <img id="wiki" class="imagenItem" src="immortalEffect.png"alt="immortalEffect"/>
+      </div>
+      <div id="ideas" class="section">
+        <div id="leftBox"></div>
+        <div id="rightBox"></div>
+        <h1 style="color: #ffd700">💡 IDEAS 💡</h1>
+        <p>
+          The ideas you submit for the mod, have to pass this filter, otherwise
+          your ideas will not be re-evaluated:
+        </p>
+        <p>
+          To be able to contribute ideas enter to the
+          <strong>Ideas</strong> section of <strong>Discord</strong>.
+        </p>
+        <p id="p2">
+          <strong>💡Required📌:</strong> When you are going to send an idea you
+          will have to put as subject your Minecraft user name.
+        </p>
+        <p id="p2">
+          <strong>💡First rule📌:</strong> The idea cannot be longer than 50
+          words due to technical issues (you can exceed 10 words maximum)
+          otherwise it will be rejected without looking at it.
+        </p>
+        <p id="p2">
+          <strong>💡Second rule📌:</strong> No obscene, obscure, or ideological
+          ideas can be presented to influence real decisions and change the
+          perspective of real life.
+        </p>
+        <p id="p2">
+          <strong>💡Third rule📌:</strong> It has to be things that have to do
+          with the main idea of the Oscurium mod.
+        </p>
+        <p id="p2">
+          <strong>💡Fourth rule📌:</strong> If the idea has already been
+          rejected, it cannot be resubmitted.
+        </p>
+        <p id="p2">
+          <strong>💡Fifth rule📌:</strong> If you send any nonsense or things
+          that have nothing to do with contributing interesting and beneficial
+          ideas for the development of the mod, they will be discarded.
+        </p>
+        <p id="p2">
+          <strong>💡Sixth rule📌:</strong> If there are already 20 ideas, no new
+          ideas will be accepted or read until 50% of the existing ideas are
+          completed.
+        </p>
+      </div>
+      <div id="actualizaciones" class="section">
+        <div id="leftBox"></div>
+        <div id="rightBox"></div>
+        <h1 style="color: #83afc1">⚙️ UPDATES ⚙️</h1>
+        <p>The version of the mod and its update will be posted here:</p>
+        <p id="p2">
+          <strong>⚙️ Version 1.2.5:</strong> A new mob called “Deependerman” has been added (he appears in the “Deep Void” dimension with a 7% chance), when defeated he will have a 10% chance to drop a new crystal, called “Immortal Crystal” (there is a mistake and it has the name “Mimetization Crystal”) which will give you for 5 seconds the “Immortal effect”, which makes you immortal and teleport in a 3x3 range when something attacks you. The “Cursed Shovel” has also been added, and therefore all cursed tools are finished.
+        </p>
+        <p id="p2">
+          <strong>⚙️ Version 1.2.4:</strong> Two achievements have been added,
+          “Cursed Armour” (given when you have all the cursed armor and you get
+          the item “Cursed Flint”) and “Cursed Tools” (given when you have all
+          the cursed tools and you get the item “Cursed Steel”), also has been
+          added the “Cursed flint and steel” and its crafting. Also the “Deep
+          void” dimension has been added, you enter it when you use the new mech
+          in the big portal of the ancient city, in it only spawnean endermans,
+          and the blocks are the sculk block and the “Deepsculk”, a new block
+          that breaks with the hoe and gives you experience.
+        </p>
+        <p id="p2">
+          <strong>⚙️ Version 1.1.9:</strong> Added the “Cursed pickaxe”, “Cursed
+          axe” and “Cursed hoe” tools; also added the cursed armor, and added
+          all the crafters of the above mentioned.
+        </p>
+        <p id="p2">
+          <strong>⚙️ Version 1.1.5:</strong> The “Dark rod fragment ore” block,
+          the minerals “Raw dark rod fragment”, “Dark rod fragment” and the
+          “Dark rod” item have been added. Also the “Dark lantern”, “Dark altar”
+          and “Cursed sword” crafters have been changed.
+        </p>
+        <p id="p2">
+          <strong>⚙️ Version 1.0.9:</strong> The “Dark golem”, the “Dark altar”,
+          all the essences and the lamp have been added. Several bugs and
+          texture model errors have also been fixed.
+        </p>
+      </div>
+    </main>
+
+    <script>
+      function toggleMenu() {
+        const menu = document.getElementById("menu");
+        menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+      }
+
+      function showSection(id) {
+        const sections = document.querySelectorAll(".section");
+        sections.forEach((section) => {
+          section.classList.remove("active");
+        });
+        document.getElementById(id).classList.add("active");
+        document.getElementById("menu").style.display = "none";
+      }
+
+      const header = document.querySelector("header");
+
+      window.addEventListener("scroll", () => {
+        const headerBottom = header.getBoundingClientRect().bottom;
+        const allLeftBoxes = document.querySelectorAll("#leftBox");
+        const allRightBoxes = document.querySelectorAll("#rightBox");
+
+        allLeftBoxes.forEach((leftBox) => {
+          leftBox.style.top = headerBottom <= 0 ? "0" : "87px";
+        });
+
+        allRightBoxes.forEach((rightBox) => {
+          rightBox.style.top = headerBottom <= 0 ? "0" : "87px";
+        });
+      });
+    </script>
+  </body>
+</html>
