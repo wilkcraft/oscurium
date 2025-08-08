@@ -515,6 +515,84 @@
         height: 100%;
         width: 350px;
       }
+
+      @media (max-width: 768px) {
+        body {
+          font-size: 16px;
+        }
+
+        header {
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .center-title {
+          position: static;
+          transform: none;
+          height: auto;
+          width: 100%;
+          max-width: 250px;
+          margin: 0 auto;
+          display: block;
+        }
+
+        header .menu-btn,
+        header .home-image,
+        header #menu-header,
+        header h2 {
+          display: none !important;
+        }
+
+        #floatingMenu {
+          display: flex !important;
+          top: 100px;
+        }
+
+        main {
+          padding-top: 80px; /* para evitar que el menú flote sobre el contenido */
+        }
+
+        .home-image {
+          width: 32px;
+          height: 32px;
+          margin-right: 5px;
+        }
+
+        h1 {
+          font-size: 30px;
+        }
+
+        h3 {
+          font-size: 20px;
+          margin-left: 0;
+        }
+
+        p {
+          font-size: 16px;
+          text-align: justify;
+        }
+
+        #p2 {
+          margin: 5px;
+        }
+
+        .scrollToStage {
+          right: 5px;
+          width: 40px;
+          height: 40px;
+        }
+
+        .scrollToStage img {
+          width: 24px;
+          height: 24px;
+        }
+
+        .dropdown {
+          left: 0;
+          width: 100%;
+        }
+      }
     </style>
   </head>
   <body>
@@ -706,19 +784,20 @@
         const menuFloating = document.getElementById("menu-floating");
         const menuHeader = document.getElementById("menu-header");
 
-        if (headerBottom <= 0) {
-          // Está oculto el header → mostrar dropdown flotante
-          if (menuFloating.style.display === "flex") {
-            menuFloating.style.display = "none";
-          } else {
-            menuFloating.style.display = "flex";
-          }
+        if (window.innerWidth <= 768) {
+          // En móvil siempre usar el menú flotante
+          menuFloating.style.display =
+            menuFloating.style.display === "flex" ? "none" : "flex";
         } else {
-          // Está visible el header → mostrar dropdown original
-          if (menuHeader.style.display === "flex") {
-            menuHeader.style.display = "none";
+          // En escritorio depende de la visibilidad del header
+          if (headerBottom <= 0) {
+            // Mostrar menú flotante
+            menuFloating.style.display =
+              menuFloating.style.display === "flex" ? "none" : "flex";
           } else {
-            menuHeader.style.display = "flex";
+            // Mostrar menú del header
+            menuHeader.style.display =
+              menuHeader.style.display === "flex" ? "none" : "flex";
           }
         }
       }
@@ -727,16 +806,11 @@
 
       window.addEventListener("scroll", () => {
         const headerBottom = header.getBoundingClientRect().bottom;
+        const floatingMenu = document.getElementById("floatingMenu");
         const allLeftBoxes = document.querySelectorAll("#leftBox");
         const allRightBoxes = document.querySelectorAll("#rightBox");
-        const floatingMenu = document.getElementById("floatingMenu");
 
-        if (headerBottom <= 0) {
-          floatingMenu.style.display = "flex";
-        } else {
-          floatingMenu.style.display = "none";
-        }
-
+        // Ajuste animación de cajas laterales
         allLeftBoxes.forEach((leftBox) => {
           leftBox.style.top = headerBottom <= 0 ? "0" : "87px";
         });
@@ -744,23 +818,22 @@
         allRightBoxes.forEach((rightBox) => {
           rightBox.style.top = headerBottom <= 0 ? "0" : "87px";
         });
-      });
 
-      const referrer = document.referrer;
-      const excludePages = ["ideas.html", "updates.html", "wiki.html"];
-      const cameFromExcludedPage = excludePages.some((page) =>
-        referrer.includes(page)
-      );
-
-      if (cameFromExcludedPage) {
-        const titleElement = document.querySelector(".center-title");
-        if (titleElement) {
-          titleElement.style.animation = "none";
-          titleElement.style.transform = "translateX(-50%) scale(1)";
-          titleElement.style.top = "10px";
-          titleElement.style.height = "70px";
+        // Control floatingMenu
+        if (window.innerWidth > 768) {
+          // Escritorio
+          if (headerBottom <= 0) {
+            floatingMenu.style.display = "flex";
+            floatingMenu.style.top = "10px";
+          } else {
+            floatingMenu.style.display = "none";
+          }
+        } else {
+          // Móvil
+          floatingMenu.style.display = "flex";
+          floatingMenu.style.top = headerBottom <= 0 ? "10px" : "100px";
         }
-      }
+      });
     </script>
   </body>
 </html>
