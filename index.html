@@ -60,9 +60,12 @@
         left: 50%;
         transform: translate(-50%, -50%) scale(2.5);
         height: 140px;
-        animation: shrinkAndMove 2.5s ease-in-out forwards;
         pointer-events: none;
         z-index: 1;
+      }
+
+      .animate-center-title {
+        animation: shrinkAndMove 2.5s ease-in-out forwards;
       }
 
       @keyframes shrinkAndMove {
@@ -522,19 +525,42 @@
         }
 
         header {
+          background-size: 40%;
           flex-direction: column;
           align-items: center;
           justify-content: center;
+          height: 75px; /* Altura fija */
+          position: relative; /* necesario para que .center-title absoluta se posicione dentro */
+          overflow: visible;
         }
 
         .center-title {
-          position: static;
-          transform: none;
-          height: auto;
-          width: 100%;
-          max-width: 250px;
-          margin: 0 auto;
-          display: block;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          height: 70px; /* más pequeña */
+          transform: translate(-50%, -50%) scale(1.8);
+          animation: shrinkAndMoveMobile 2.5s ease-in-out forwards;
+          pointer-events: none;
+        }
+
+        .center-title.animating {
+          z-index: 999999999;
+        }
+
+        @keyframes shrinkAndMoveMobile {
+          from {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(1.8);
+            height: 70px;
+          }
+          to {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(1);
+            height: 70px;
+          }
         }
 
         header .menu-btn,
@@ -547,6 +573,7 @@
         #floatingMenu {
           display: flex !important;
           top: 100px;
+          background-size: 50%;
         }
 
         main {
@@ -833,6 +860,18 @@
           floatingMenu.style.display = "flex";
           floatingMenu.style.top = headerBottom <= 0 ? "10px" : "100px";
         }
+      });
+
+      window.addEventListener("load", () => {
+        const title = document.querySelector(".center-title");
+
+        // Aplica animación SIEMPRE
+        title.classList.add("animate-center-title", "animating");
+
+        // Quita la clase que eleva z-index después de la animación (2.5s)
+        setTimeout(() => {
+          title.classList.remove("animating");
+        }, 2500);
       });
     </script>
   </body>
