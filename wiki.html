@@ -573,10 +573,12 @@
 
         header {
           background-size: 40%;
+          flex-direction: column;
+          align-items: center;
           justify-content: center;
-          height: 90px;
-          padding: 0;
-          background-size: cover;
+          height: 75px; /* Altura fija */
+          position: relative; /* necesario para que .center-title absoluta se posicione dentro */
+          overflow: visible;
         }
 
         .center-title {
@@ -1998,4 +2000,5 @@
     </script>
   </body>
 </html>
+
 
