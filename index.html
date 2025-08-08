@@ -68,6 +68,14 @@
         animation: shrinkAndMove 2.5s ease-in-out forwards;
       }
 
+      .center-title-static {
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%) scale(1);
+        height: 70px;
+        z-index: 1;
+      }
+
       @keyframes shrinkAndMove {
         from {
           top: 50%;
@@ -538,10 +546,13 @@
           position: absolute;
           top: 50%;
           left: 50%;
-          height: 70px; /* más pequeña */
+          height: 70px;
           transform: translate(-50%, -50%) scale(1.8);
-          animation: shrinkAndMoveMobile 2.5s ease-in-out forwards;
           pointer-events: none;
+        }
+
+        .center-title.animate-mobile {
+          animation: shrinkAndMoveMobile 2.5s ease-in-out forwards;
         }
 
         .center-title.animating {
@@ -618,6 +629,13 @@
         .dropdown {
           left: 0;
           width: 100%;
+        }
+        .center-title-static-mobile {
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%) scale(1);
+          height: 70px;
+          z-index: 1;
         }
       }
     </style>
@@ -865,13 +883,32 @@
       window.addEventListener("load", () => {
         const title = document.querySelector(".center-title");
 
-        // Aplica animación SIEMPRE
-        title.classList.add("animate-center-title", "animating");
+        const fromAnotherPage =
+          document.referrer.includes("wiki.html") ||
+          document.referrer.includes("ideas.html") ||
+          document.referrer.includes("updates.html");
 
-        // Quita la clase que eleva z-index después de la animación (2.5s)
-        setTimeout(() => {
-          title.classList.remove("animating");
-        }, 2500);
+        const isMobile = window.innerWidth <= 768;
+
+        if (!fromAnotherPage) {
+          // Animación
+          if (isMobile) {
+            title.classList.add("animate-mobile", "animating");
+          } else {
+            title.classList.add("animate-center-title", "animating");
+          }
+
+          setTimeout(() => {
+            title.classList.remove("animating");
+          }, 2500);
+        } else {
+          // Sin animación → aplicar estado final
+          if (isMobile) {
+            title.classList.add("center-title-static-mobile");
+          } else {
+            title.classList.add("center-title-static");
+          }
+        }
       });
     </script>
   </body>
