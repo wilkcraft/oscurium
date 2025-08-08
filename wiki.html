@@ -1889,19 +1889,20 @@
         const menuFloating = document.getElementById("menu-floating");
         const menuHeader = document.getElementById("menu-header");
 
-        if (headerBottom <= 0) {
-          // Está oculto el header → mostrar dropdown flotante
-          if (menuFloating.style.display === "flex") {
-            menuFloating.style.display = "none";
-          } else {
-            menuFloating.style.display = "flex";
-          }
+        if (window.innerWidth <= 768) {
+          // En móvil siempre usar el menú flotante
+          menuFloating.style.display =
+            menuFloating.style.display === "flex" ? "none" : "flex";
         } else {
-          // Está visible el header → mostrar dropdown original
-          if (menuHeader.style.display === "flex") {
-            menuHeader.style.display = "none";
+          // En escritorio depende de la visibilidad del header
+          if (headerBottom <= 0) {
+            // Mostrar menú flotante
+            menuFloating.style.display =
+              menuFloating.style.display === "flex" ? "none" : "flex";
           } else {
-            menuHeader.style.display = "flex";
+            // Mostrar menú del header
+            menuHeader.style.display =
+              menuHeader.style.display === "flex" ? "none" : "flex";
           }
         }
       }
